@@ -1,7 +1,7 @@
 from app import app,db
 from flask import render_template
 
-from app.forms import EditProfileForm, LogInForm, RegistrationForm # import LoginForm class from forms.py 
+from app.forms import EditProfileForm, LoginForm, RegistrationForm # import LoginForm class from forms.py 
 from flask.helpers import flash, url_for
 from flask import redirect
 from app.models import User
@@ -42,7 +42,7 @@ def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
 
-    form = LogInForm() #instantiates LogInForm class from forms.py and send it to template
+    form = LoginForm() #instantiates LogInForm class from forms.py and send it to template
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()  # first()--executes a query, when you only need to have one result
         if user is None or not user.check_password(form.password.data):
